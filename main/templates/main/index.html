@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Мои покупки</h1>
+    <br>
+    {% if purchases %}
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr align="center">
+                    <th>Дата</th>
+                    <th>Товар</th>
+                    <th>Кол-во</th>
+                    <th>Цена</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in purchases %}
+                    <tr>
+                        <td align="center">{{ element.date|date:"d.m.Y" }}</td>
+                        <td>{{ element.product }}</td>
+                        <td align="center">{{ element.amount|floatformat:"-3" }}</td>
+                        <td align="center">{{ element.price|floatformat:"-2" }} ₽</td>
+                        <td align="center">{{ element.total|floatformat:"-2" }} ₽</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>В базе данных нет записей!</p>
+    {% endif %}
+{% endblock %}
